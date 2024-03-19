@@ -25,24 +25,28 @@ function addBookToLibrary(newBook) {
 
 const bookTable = document.querySelector("tbody");
 
+function addTableRow() {
+  const tableRow = document.createElement("tr");
+  bookTable.appendChild(tableRow);
+  const tableBookTitle = document.createElement("td");
+  tableBookTitle.textContent = myLibrary[i].title;
+  tableRow.appendChild(tableBookTitle);
+  const tableAuthor = document.createElement("td");
+  tableAuthor.textContent = myLibrary[i].author;
+  tableRow.appendChild(tableAuthor);
+  const tablePages = document.createElement("td");
+  tablePages.textContent = myLibrary[i].pages;
+  tableRow.appendChild(tablePages);
+  const tableRead = document.createElement("td");
+  tableRead.textContent = myLibrary[i].read;
+  tableRow.appendChild(tableRead);
+  console.log("Run Loop" + i);
+}
+
 let i = 0;
 function createTable() {
   for (i = 0; i < myLibrary.length; i++) {
-    const tableRow = document.createElement("tr");
-    bookTable.appendChild(tableRow);
-    const tableBookTitle = document.createElement("td");
-    tableBookTitle.textContent = myLibrary[i].title;
-    tableRow.appendChild(tableBookTitle);
-    const tableAuthor = document.createElement("td");
-    tableAuthor.textContent = myLibrary[i].author;
-    tableRow.appendChild(tableAuthor);
-    const tablePages = document.createElement("td");
-    tablePages.textContent = myLibrary[i].pages;
-    tableRow.appendChild(tablePages);
-    const tableRead = document.createElement("td");
-    tableRead.textContent = myLibrary[i].read;
-    tableRow.appendChild(tableRead);
-    console.log("Run Loop" + i);
+    addTableRow();
   }
 }
 
@@ -60,21 +64,7 @@ submitButton.addEventListener("click", function () {
   const readValue = inputRead.checked;
   const newBook = new Book(nameValue, authorValue, pagesValue, readValue);
   addBookToLibrary(newBook);
-  const tableRow = document.createElement("tr");
-  bookTable.appendChild(tableRow);
-  const tableBookTitle = document.createElement("td");
-  tableBookTitle.textContent = myLibrary[i].title;
-  tableRow.appendChild(tableBookTitle);
-  const tableAuthor = document.createElement("td");
-  tableAuthor.textContent = myLibrary[i].author;
-  tableRow.appendChild(tableAuthor);
-  const tablePages = document.createElement("td");
-  tablePages.textContent = myLibrary[i].pages;
-  tableRow.appendChild(tablePages);
-  const tableRead = document.createElement("td");
-  tableRead.textContent = myLibrary[i].read;
-  tableRow.appendChild(tableRead);
-  console.log("Run Loop" + i);
+  addTableRow();
   i++;
 });
 
