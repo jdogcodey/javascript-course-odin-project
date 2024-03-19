@@ -1,4 +1,4 @@
-const mylibrary = [];
+const myLibrary = [];
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -20,7 +20,29 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(newBook) {
-  mylibrary.push(newBook);
+  myLibrary.push(newBook);
+}
+
+const bookTable = document.querySelector("tbody");
+
+function updateTable() {
+  for (let i = 0; i < myLibrary.length; i++) {
+    const tableRow = document.createElement("tr");
+    bookTable.appendChild(tableRow);
+    const tableBookTitle = document.createElement("td");
+    tableBookTitle.textContent = myLibrary[i].title;
+    tableRow.appendChild(tableBookTitle);
+    const tableAuthor = document.createElement("td");
+    tableAuthor.textContent = myLibrary[i].author;
+    tableRow.appendChild(tableAuthor);
+    const tablePages = document.createElement("td");
+    tablePages.textContent = myLibrary[i].pages;
+    tableRow.appendChild(tablePages);
+    const tableRead = document.createElement("td");
+    tableRead.textContent = myLibrary[i].read;
+    tableRow.appendChild(tableRead);
+    console.log("Run Loop" + i);
+  }
 }
 
 const theHobbit = new Book("The Hobbit", "J.R.R.Tolkein", "297", "not read");
@@ -31,4 +53,5 @@ addBookToLibrary(harryPotter);
 
 console.log(theHobbit);
 console.log(harryPotter);
-console.log(mylibrary);
+console.log(myLibrary);
+updateTable();
