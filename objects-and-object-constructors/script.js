@@ -19,6 +19,14 @@ function Book(title, author, pages, read) {
   };
 }
 
+const newBookButton = document.querySelector("button");
+const form = document.querySelector("form");
+
+newBookButton.addEventListener("click", function () {
+  newBookButton.style.display = "none";
+  form.style.display = "block";
+});
+
 function addBookToLibrary(newBook) {
   myLibrary.push(newBook);
 }
@@ -40,7 +48,22 @@ function addTableRow() {
   const tableRead = document.createElement("td");
   tableRead.textContent = myLibrary[i].read;
   tableRow.appendChild(tableRead);
+  const readCheck = document.createElement("td");
+  tableRow.appendChild(readCheck);
+  const readButton = document.createElement("input");
+  readButton.type = "checkbox";
+  readCheck.appendChild(readButton);
+  const deleteCell = document.createElement("td");
+  tableRow.appendChild(deleteCell);
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "Remove Book";
+  deleteButton.addEventListener("click", function () {
+    tableRow.remove();
+  });
+  deleteCell.appendChild(deleteButton);
   console.log("Run Loop" + i);
+  newBookButton.style.display = "block";
+  form.style.display = "none";
 }
 
 let i = 0;
@@ -73,5 +96,7 @@ const harryPotter = new Book("Harry Potter", "J.K Rowling", "305", "not read");
 
 addBookToLibrary(theHobbit);
 addBookToLibrary(harryPotter);
+
+const checkBoxes = document.querySelectorAll("checkbox");
 
 createTable();
