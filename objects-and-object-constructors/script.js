@@ -25,8 +25,9 @@ function addBookToLibrary(newBook) {
 
 const bookTable = document.querySelector("tbody");
 
-function updateTable() {
-  for (let i = 0; i < myLibrary.length; i++) {
+let i = 0;
+function createTable() {
+  for (i = 0; i < myLibrary.length; i++) {
     const tableRow = document.createElement("tr");
     bookTable.appendChild(tableRow);
     const tableBookTitle = document.createElement("td");
@@ -45,13 +46,42 @@ function updateTable() {
   }
 }
 
+const submitButton = document.querySelector("#submit");
+
+submitButton.addEventListener("click", function () {
+  event.preventDefault();
+  const inputName = document.getElementById("name");
+  const nameValue = inputName.value;
+  const inputAuthor = document.getElementById("author");
+  const authorValue = inputAuthor.value;
+  const inputPages = document.getElementById("pages");
+  const pagesValue = inputPages.value;
+  const inputRead = document.getElementById("read");
+  const readValue = inputRead.checked;
+  const newBook = new Book(nameValue, authorValue, pagesValue, readValue);
+  addBookToLibrary(newBook);
+  const tableRow = document.createElement("tr");
+  bookTable.appendChild(tableRow);
+  const tableBookTitle = document.createElement("td");
+  tableBookTitle.textContent = myLibrary[i].title;
+  tableRow.appendChild(tableBookTitle);
+  const tableAuthor = document.createElement("td");
+  tableAuthor.textContent = myLibrary[i].author;
+  tableRow.appendChild(tableAuthor);
+  const tablePages = document.createElement("td");
+  tablePages.textContent = myLibrary[i].pages;
+  tableRow.appendChild(tablePages);
+  const tableRead = document.createElement("td");
+  tableRead.textContent = myLibrary[i].read;
+  tableRow.appendChild(tableRead);
+  console.log("Run Loop" + i);
+  i++;
+});
+
 const theHobbit = new Book("The Hobbit", "J.R.R.Tolkein", "297", "not read");
 const harryPotter = new Book("Harry Potter", "J.K Rowling", "305", "not read");
 
 addBookToLibrary(theHobbit);
 addBookToLibrary(harryPotter);
 
-console.log(theHobbit);
-console.log(harryPotter);
-console.log(myLibrary);
-updateTable();
+createTable();
