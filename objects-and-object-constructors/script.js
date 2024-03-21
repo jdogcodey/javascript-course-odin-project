@@ -6,30 +6,28 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
-  if (read === true) {
-    this.readWord = "Read";
-  } else {
-    this.readWord = "Not Read";
-  }
-  this.flipper = function () {
-    if (this.read === true) {
-      this.read = false;
-      this.readWord = "Not Read";
-    } else {
-      this.read = true;
-      this.readWord = "Read";
-    }
-  };
+  this.readWord = read ? "Read" : "Not Read";
   this.libraryNumber = libraryNumber;
-  this.delete = function () {
-    myLibrary.splice(this.libraryNumber, 1);
-    const thisBookRow = document.getElementById(this.libraryNumber);
-    thisBookRow.remove();
-    i--;
-    libraryNumber--;
-  };
   libraryNumber++;
 }
+
+Book.prototype.flipper = function () {
+  if (this.read === true) {
+    this.read = false;
+    this.readWord = "Not Read";
+  } else {
+    this.read = true;
+    this.readWord = "Read";
+  }
+};
+
+Book.prototype.delete = function () {
+  myLibrary.splice(this.libraryNumber, 1);
+  const thisBookRow = document.getElementById(this.libraryNumber);
+  thisBookRow.remove();
+  i--;
+  libraryNumber--;
+};
 
 const newBookButton = document.querySelector("button");
 const form = document.querySelector("form");
