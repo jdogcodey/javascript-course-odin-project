@@ -1,33 +1,63 @@
 const myLibrary = [];
 let libraryNumber = 0;
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.readWord = read ? "Read" : "Not Read";
-  this.libraryNumber = libraryNumber;
-  libraryNumber++;
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.readWord = read ? "Read" : "Not Read";
+    this.libraryNumber = libraryNumber;
+    libraryNumber++;
+  }
+
+  flipper() {
+    if (this.read === true) {
+      this.read = false;
+      this.readWord = "Not Read";
+    } else {
+      this.read = true;
+      this.readWord = "Read";
+    }
+  }
+
+  delete() {
+    myLibrary.splice(this.libraryNumber, 1);
+    const thisBookRow = document.getElementById(this.libraryNumber);
+    thisBookRow.remove();
+    i--;
+    libraryNumber--;
+  }
 }
 
-Book.prototype.flipper = function () {
-  if (this.read === true) {
-    this.read = false;
-    this.readWord = "Not Read";
-  } else {
-    this.read = true;
-    this.readWord = "Read";
-  }
-};
+// function Book(title, author, pages, read) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.read = read;
+//   this.readWord = read ? "Read" : "Not Read";
+//   this.libraryNumber = libraryNumber;
+//   libraryNumber++;
+// }
 
-Book.prototype.delete = function () {
-  myLibrary.splice(this.libraryNumber, 1);
-  const thisBookRow = document.getElementById(this.libraryNumber);
-  thisBookRow.remove();
-  i--;
-  libraryNumber--;
-};
+// Book.prototype.flipper = function () {
+//   if (this.read === true) {
+//     this.read = false;
+//     this.readWord = "Not Read";
+//   } else {
+//     this.read = true;
+//     this.readWord = "Read";
+//   }
+// };
+
+// Book.prototype.delete = function () {
+//   myLibrary.splice(this.libraryNumber, 1);
+//   const thisBookRow = document.getElementById(this.libraryNumber);
+//   thisBookRow.remove();
+//   i--;
+//   libraryNumber--;
+// };
 
 const newBookButton = document.querySelector("button");
 const form = document.querySelector("form");
