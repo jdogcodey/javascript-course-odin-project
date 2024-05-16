@@ -114,7 +114,7 @@ function addTableRow() {
   deleteCell.appendChild(deleteButton);
   console.log("Run Loop" + i);
   newBookButton.style.display = "block";
-  form.style.display = "none";
+  // form.style.display = "none";
 }
 
 let i = 0;
@@ -126,7 +126,7 @@ function createTable() {
 
 const submitButton = document.querySelector("#submit");
 
-submitButton.addEventListener("click", function () {
+function submit() {
   event.preventDefault();
   const inputName = document.getElementById("name");
   const nameValue = inputName.value;
@@ -140,6 +140,11 @@ submitButton.addEventListener("click", function () {
   addBookToLibrary(newBook);
   addTableRow();
   i++;
+}
+
+submitButton.addEventListener("click", () => {
+  event.preventDefault();
+  formValidation();
 });
 
 myLibrary;
@@ -151,3 +156,25 @@ addBookToLibrary(theHobbit);
 addBookToLibrary(harryPotter);
 
 createTable();
+
+// Adding JS Form validation function
+
+function formValidation() {
+  const bookName = document.querySelector("#name");
+  const author = document.querySelector("#author");
+  const page = document.querySelector("#pages");
+  const errorBox = document.querySelector("#error");
+  if (
+    bookName.checkValidity() &&
+    author.checkValidity() &&
+    page.checkValidity()
+  ) {
+    submit();
+  } else if (bookName.validity.valueMissing) {
+    errorBox.innerHTML = "Please add a Book name";
+  } else if (author.validity.valueMissing) {
+    errorBox.innerHTML = "Please add an Author";
+  } else if (page.validity.valueMissing) {
+    errorBox.innerHTML = "Please add the number of pages";
+  }
+}
